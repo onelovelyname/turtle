@@ -9,6 +9,18 @@ class PersonalForm extends React.Component {
     	firstName: '',
     	lastName: '',
     	email: '',
+    	cardType: '',
+    	cardNumber: '',
+    	exMonth: '',
+    	exYear: '',
+    	csc: '',
+    	country: '',
+    	address1: '',
+    	address2: '',
+    	city: '',
+    	province: '',
+    	postalCode: '',
+    	response: null
 
     };
 
@@ -16,12 +28,33 @@ class PersonalForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  sendPayment = async () => {
+    const response = await fetch('/payment', {
+		  	method: 'POST',
+		  	headers: {
+		    	'Accept': 'application/json',
+		    	'Content-Type': 'application/json',
+		},
+  			body: JSON.stringify(this.state)
+	})
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message) 
+    }
+    return body;
+  };
+
   handleChange(event) {
     this.setState({[event.target.id]: event.target.value});
   }
 
   handleSubmit(event) {
-    alert('A payment was submitted: ' + this.state);
+    this.sendPayment()
+      .then(res => 
+      	this.setState({ response: res.payment }))
+      .then(res => console.log(this.state.response))
+      .catch(err => console.log(err))
     event.preventDefault();
   }
 
@@ -45,7 +78,7 @@ class PersonalForm extends React.Component {
 	        <LabelForm title="Address Line 1" finder="address1" handleChange={this.handleChange} />
 	        <LabelForm title="Address Line 2" finder="address2" handleChange={this.handleChange} />
 	        <LabelForm title="Town/City" finder="city" handleChange={this.handleChange} />
-	        <LabelForm title="State/Province" finder="state" handleChange={this.handleChange} />
+	        <LabelForm title="State/Province" finder="province" handleChange={this.handleChange} />
 	        <LabelForm title="Postal Code" finder="postalCode" handleChange={this.handleChange} />
 
 	        <input className="btn btn-primary btn-lg" type="submit" value="Submit" />
