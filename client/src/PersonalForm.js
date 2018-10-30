@@ -17,12 +17,11 @@ class PersonalForm extends React.Component {
   }
 
   handleChange(event) {
-  	console.log(event.target.id);
-    this.setState({value: event.target.value});
+    this.setState({[event.target.id]: event.target.value});
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
+    alert('A payment was submitted: ' + this.state);
     event.preventDefault();
   }
 
