@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import $ from 'jquery';
-import Popper from 'popper.js';
 import './App.css';
 import PersonalForm from './PersonalForm.js';
 
@@ -35,8 +33,8 @@ class App extends Component {
           <h1 className="App-title">Hello, Melanie</h1>
         </header>
         <div className="container-fluid">
-          <p className="App-intro">{this.state.data}</p>
           <PersonalForm />
+          <p className="App-intro">{this.state.data}</p>
         </div>
       </div>
     );
