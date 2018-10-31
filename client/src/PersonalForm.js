@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import LabelForm from './LabelForm.js';
 import DropdownForm from './DropdownForm.js';
 import SectionHeading from './SectionHeading.js';
+import Titles from './titles.js';
 
 const stateData = {
 	caretaker: {
@@ -54,7 +55,6 @@ class PersonalForm extends React.Component {
     	province: '',
     	postalCode: '',
     	response: null
-
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -91,52 +91,38 @@ class PersonalForm extends React.Component {
   }
 
   render() {
-
-  // 	const listItems = Object.keys(stateData).map(function(key, keyIndex) {
-  // 		return (
-  // 			<div>
-		// 	<SectionHeading title={stateData[key]['title']}/>
-		// 	Object.keys(stateData[key]['items']).map(function(item, itemIndex => 
-		// 		<LabelForm title={item} finder="Finder" handleChange={PersonalForm.handleChange} />
-		// 	))
-		// 	</div>
-		// );
-  // 	});
-
+  	const language = this.props.language;
     return (
     	<div className="container">
 	      	<form onSubmit={this.handleSubmit}>
 	      		
 	      		<div className="row">
 	      			<div className="col">
-			      		<SectionHeading title="Caretaker Information"/>
+			      		<SectionHeading title={Titles['caretaker'][language]}/>
 					    <LabelForm title="First Name" finder="firstName" handleChange={this.handleChange} />
 					    <LabelForm title="Last Name" finder="lastName" handleChange={this.handleChange} />
 					    <LabelForm title="Email" finder="email" handleChange={this.handleChange} />
 				    </div>
+
 				    <div className="col">
-				      	<SectionHeading title="Payment"/>
+				      	<SectionHeading title={Titles['payment'][language]}/>
 				        <DropdownForm title="Card Type" finder="cardType" items={['Visa', 'Mastercard', 'American Express', 'Discover']} handleChange={this.handleChange} />
 				        <LabelForm title="Card Number" finder="cardNumber" handleChange={this.handleChange} />
 					    <DropdownForm title="Expiration Month" finder="exMonth" items={['Jan', 'Feb', 'Mar', 'Apr', 'May']} handleChange={this.handleChange} />
 					    <DropdownForm title="Expiration Year" finder="exYear" items={['2018', '2019', '2020', '2021', '2022']} handleChange={this.handleChange} />
 				        <LabelForm title="CSC" finder="csc" handleChange={this.handleChange} />
 		        	</div>
-		        </div>
-		        <div className="row">
 		        	<div className="col">
-			      	<SectionHeading title="Billing Information"/>
-			        <LabelForm title="Country" finder="country" handleChange={this.handleChange} />
-			        <LabelForm title="Address Line 1" finder="address1" handleChange={this.handleChange} />
-			        <LabelForm title="Address Line 2" finder="address2" handleChange={this.handleChange} />
-			        <LabelForm title="Town/City" finder="city" handleChange={this.handleChange} />
-			        <LabelForm title="State/Province" finder="province" handleChange={this.handleChange} />
-			        <LabelForm title="Postal Code" finder="postalCode" handleChange={this.handleChange} />
+				      	<SectionHeading title={Titles['billing'][language]}/>
+				        <LabelForm title="Country" finder="country" handleChange={this.handleChange} />
+				        <LabelForm title="Address Line 1" finder="address1" handleChange={this.handleChange} />
+				        <LabelForm title="Address Line 2" finder="address2" handleChange={this.handleChange} />
+				        <LabelForm title="Town/City" finder="city" handleChange={this.handleChange} />
+				        <LabelForm title="State/Province" finder="province" handleChange={this.handleChange} />
+				        <LabelForm title="Postal Code" finder="postalCode" handleChange={this.handleChange} />
 			        </div>	
-			        <div className="col">
-				        <input className="btn btn-primary btn-lg" type="submit" value="Submit" />
-					</div>
 	      		</div>
+	      		<input className="btn btn-primary btn-lg" type="submit" value="Submit" />
 	      	</form>
       	</div>
     );

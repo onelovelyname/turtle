@@ -3,10 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import './App.css';
 import PersonalForm from './PersonalForm.js';
+import LanguageSelector from './LanguageSelector.js';
 
 class App extends Component {
   state = {
-    data: null
+    data: null,
+    language: 'English'
   };
 
   componentDidMount() {
@@ -26,14 +28,19 @@ class App extends Component {
     return body;
   };
 
+  updateLanguage(newLanguage) {
+    this.setState({language: newLanguage})
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Hello, Melanie</h1>
+          <h1 className="App-title mt-4">Make your booking, my friend</h1>
+          <LanguageSelector {...this.state} updateLanguage={this.updateLanguage.bind(this)}  />
         </header>
         <div className="container-fluid">
-          <PersonalForm />
+          <PersonalForm {...this.state} />
           <p className="App-intro">{this.state.data}</p>
         </div>
       </div>

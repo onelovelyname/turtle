@@ -16,7 +16,7 @@ class DropdownForm extends React.Component {
   					<label id={this.props.title}>{this.props.title}</label>
   				</div>
   				<div className="form-group mx-sm-3 mb-2">
-					<select className="form-control form-control-sm" id={this.props.title}>
+					<select className="form-control form-control-sm" id={this.props.title} onChange={this.props.handleChange}>
 						{this.state.items}
 					</select>
 				</div>
